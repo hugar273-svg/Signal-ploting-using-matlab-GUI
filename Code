@@ -1,0 +1,73 @@
+function varargout = signal(varargin)
+gui_Singleton = 1;
+gui_State = struct('gui_Name',       mfilename, ...
+                   'gui_Singleton',  gui_Singleton, ...
+                   'gui_OpeningFcn', @signal_OpeningFcn, ...
+                   'gui_OutputFcn',  @signal_OutputFcn, ...
+                   'gui_LayoutFcn',  [] , ...
+                   'gui_Callback',   []);
+if nargin && ischar(varargin{1})
+    gui_State.gui_Callback = str2func(varargin{1});
+end
+
+if nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+else
+    gui_mainfcn(gui_State, varargin{:});
+end
+
+
+function signal_OpeningFcn(hObject, eventdata, handles, varargin)
+handles.output = hObject;
+
+
+guidata(hObject, handles);
+
+
+function varargout = signal_OutputFcn(hObject, eventdata, handles) 
+
+varargout{1} = handles.output;
+
+function pushbutton2_Callback(hObject, eventdata, handles)
+
+Fs=1000;
+t=0:1/Fs:1;
+f=5;
+s=sin(2*pi*f*t);
+axes(handles.axes1),plot(s);
+
+function pushbutton3_Callback(hObject, eventdata, handles)
+Fs=1000;
+t=0:1/Fs:1;
+f=5;
+s2=square(2*pi*f*t);
+axes(handles.axes2),plot(s2);
+
+function pushbutton4_Callback(hObject, eventdata, handles)
+Fs=1000;
+t=0:1/Fs:1;
+f=5;
+s3=sawtooth(2*pi*f*t,0.5);
+axes(handles.axes3),plot(s3);
+.
+function pushbutton5_Callback(hObject, eventdata, handles)
+
+cla(handles.axes1);
+cla(handles.axes2);
+cla(handles.axes3);
+cla(handles.axes4);
+.
+function pushbutton6_Callback(hObject, eventdata, handles)
+
+close
+
+function pushbutton7_Callback(hObject, eventdata, handles)
+Fs=1000;
+t=0:1/Fs:1;
+f=5;
+s=sin(2*pi*f*t);
+s2=square(2*pi*f*t);
+s3=sawtooth(2*pi*f*t,0.5);
+c=s+s2+s3;
+axes(handles.axes4),plot(c);
+
